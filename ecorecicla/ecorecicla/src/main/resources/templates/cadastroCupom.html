@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cupom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #399be8;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            margin-top: 50px;
+        }
+        select, button, input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Cupom</h1>
+    <form th:action="@{/cupons/cadastro}" method="post" th:object="${cupom}">
+        <input type="text" placeholder="Descrição" th:field="*{descricao}" required><br>
+        <input type="number" placeholder="Valor" th:field="*{valor}" required><br>
+        <select th:field="*{usuario.id}" required>
+            <option value="" disabled selected>Selecione o Usuário</option>
+            <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+        </select><br>
+        <select th:field="*{empresa.id}" required>
+            <option value="" disabled selected>Selecione a Empresa</option>
+            <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nome}"></option>
+        </select><br>
+        <button type="submit">Cadastrar Cupom</button>
+    </form>
+</body>
+</html>
